@@ -77,6 +77,13 @@ const FinanceTracker = () => {
     a.click();
   };
 
+  const navTabs = [
+    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { id: 'income', label: 'Revenue', icon: ArrowUpRight },
+    { id: 'expenses', label: 'Expenses', icon: ArrowDownLeft },
+    { id: 'projections', label: 'Analysis', icon: PieChart },
+  ];
+
   return (
     <div className="min-h-screen bg-[#F8FAFC]">
       {/* Premium Navigation */}
@@ -93,12 +100,7 @@ const FinanceTracker = () => {
           </div>
           
           <div className="hidden md:flex items-center gap-2 bg-slate-100/50 p-1 rounded-2xl">
-            {[
-              { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-              { id: 'income', label: 'Revenue', icon: ArrowUpRight },
-              { id: 'expenses', label: 'Expenses', icon: ArrowDownLeft },
-              { id: 'projections', label: 'Analysis', icon: PieChart },
-            ].map(tab => (
+            {navTabs.map(tab => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
@@ -121,7 +123,7 @@ const FinanceTracker = () => {
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto px-6 py-10 animate-fade-in">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10 pb-24 sm:pb-10 animate-fade-in">
         {activeTab === 'dashboard' && (
           <div className="space-y-8">
             {/* Stats Overview */}
@@ -424,6 +426,21 @@ const FinanceTracker = () => {
           </div>
         )}
       </main>
+      {/* Mobile Bottom Navigation */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-100 px-4 py-2 flex items-center justify-around z-50 pb-safe">
+        {navTabs.map(tab => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            className={`flex flex-col items-center gap-1 p-2 transition-all ${
+              activeTab === tab.id ? 'text-blue-600' : 'text-slate-400'
+            }`}
+          >
+            <tab.icon size={20} className={activeTab === tab.id ? 'scale-110' : ''} />
+            <span className="text-[10px] font-bold uppercase tracking-tighter">{tab.label}</span>
+          </button>
+        ))}
+      </div>
     </div>
   );
 };
