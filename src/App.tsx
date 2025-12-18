@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { 
   Download, Plus, Trash2, TrendingUp, TrendingDown, 
   DollarSign, Calendar, LayoutDashboard, Wallet, 
